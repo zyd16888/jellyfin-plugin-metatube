@@ -76,6 +76,12 @@ public class PluginConfiguration : BasePluginConfiguration
     public string BadgeUrl { get; set; } = "zimu.png";
 
 #if __EMBY__
+    [DisplayName("Badge url 2")]
+    [Description("Second badge url for videos with 'UC' tag, PNG format is recommended.")]
+#endif
+    public string BadgeUrl2 { get; set; } = "zimu_uc.png";
+
+#if __EMBY__
     [DisplayName("Primary image ratio")]
     [Description("Aspect ratio for primary images, set a negative value to use the default.")]
 #endif

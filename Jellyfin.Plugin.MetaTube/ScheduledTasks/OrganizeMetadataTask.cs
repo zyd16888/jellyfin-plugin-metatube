@@ -91,7 +91,7 @@ public class OrganizeMetadataTask : IScheduledTask
                     {
                         genres.Add(ChineseSubtitle);
                         if (Plugin.Instance.Configuration.EnableBadges)
-                            await SetPrimaryImage(item, Plugin.Instance.Configuration.BadgeUrl, cancellationToken);
+                            await SetPrimaryImage(item, true, cancellationToken);
                         break;
                     }
                     // Remove `ChineseSubtitle` genre.
@@ -99,7 +99,7 @@ public class OrganizeMetadataTask : IScheduledTask
                     {
                         genres.RemoveAll(s => s.Equals(ChineseSubtitle));
                         if (Plugin.Instance.Configuration.EnableBadges)
-                            await SetPrimaryImage(item, string.Empty, cancellationToken);
+                            await SetPrimaryImage(item, false, cancellationToken);
                         break;
                     }
                 }
@@ -175,19 +175,36 @@ public class OrganizeMetadataTask : IScheduledTask
                                      .Equals(basename, StringComparison.OrdinalIgnoreCase));
     }
 
-    private static async Task SetPrimaryImage(BaseItem item, string badge, CancellationToken cancellationToken)
+    private async Task SetPrimaryImage(BaseItem item, bool hasChineseSubtitle, CancellationToken cancellationToken)
     {
         var pid = item.GetPid(Plugin.Instance.Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
             return;
 
         var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
-        // Set first primary image.
-        item.SetImage(new ItemImageInfo
+        
+        if (Plugin.Instance.Configuration.EnableBadges && hasChineseSubtitle)
         {
-            Path = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1, badge),
-            Type = ImageType.Primary
-        }, 0);
+            string badgeUrl;
+            
+            // 检查是否包含"UC"关键词
+            if (item.Path.Contains("UC", StringComparison.OrdinalIgnoreCase))
+            {
+                badgeUrl = Plugin.Instance.Configuration.BadgeUrl2;
+            }
+            else
+            {
+                badgeUrl = Plugin.Instance.Configuration.BadgeUrl;
+            }
+
+            var imageUrl = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1, badgeUrl);
+            await ApiClient.GetImageResponse(imageUrl, cancellationToken);
+        }
+        else
+        {
+            var imageUrl = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1);
+            await ApiClient.GetImageResponse(imageUrl, cancellationToken);
+        }
     }
 
     #endregion

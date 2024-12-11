@@ -91,6 +91,11 @@
                         <input id="txtBadgeUrl" is="emby-input" name="txtBadgeUrl" type="text"/>
                         <div class="fieldDescription">Custom badge url, PNG format is recommended. (default: zimu.png)</div>
                     </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="txtBadgeUrl2">Badge url 2:</label>
+                        <input id="txtBadgeUrl2" is="emby-input" name="txtBadgeUrl2" type="text" />
+                        <div class="fieldDescription">Second badge url for videos with 'UC' tag, PNG format is recommended.</div>
+                    </div>
                 </div>
 
                 <div class="verticalSection">
@@ -390,6 +395,7 @@
                 page.querySelector('#chkEnableRealActorNames').checked = config.EnableRealActorNames;
                 page.querySelector('#chkEnableBadges').checked = config.EnableBadges;
                 $('#txtBadgeUrl', page).val(config.BadgeUrl).change();
+                $('#txtBadgeUrl2', page).val(config.BadgeUrl2).change();
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
                 $('#txtDefaultImageQuality', page).val(config.DefaultImageQuality).change();
                 page.querySelector('#chkEnableMovieProviderFilter').checked = config.EnableMovieProviderFilter;
@@ -434,6 +440,7 @@
                 config.EnableRealActorNames = $('#chkEnableRealActorNames', form).prop('checked');
                 config.EnableBadges = $('#chkEnableBadges', form).prop('checked');
                 config.BadgeUrl = $('#txtBadgeUrl', form).val();
+                config.BadgeUrl2 = $('#txtBadgeUrl2', form).val();
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
                 config.DefaultImageQuality = $('#txtDefaultImageQuality', form).val();
                 config.EnableMovieProviderFilter = $('#chkEnableMovieProviderFilter', form).prop('checked');
