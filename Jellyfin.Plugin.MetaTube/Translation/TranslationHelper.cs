@@ -68,7 +68,8 @@ public static class TranslationHelper
                     { "openai-api-key", Configuration.OpenAiXApiKey },
                     { "base-url", Configuration.OpenAiXBaseUrl },
                     { "model", Configuration.OpenAiXModel },
-                    { "system-prompt", Configuration.OpenAiXSystemPrompt }
+                    { "system-prompt", Configuration.OpenAiXSystemPrompt },
+                    { "temperature", Configuration.OpenAiXTemperature.ToString("F1") }
                 });
                 break;
             default:

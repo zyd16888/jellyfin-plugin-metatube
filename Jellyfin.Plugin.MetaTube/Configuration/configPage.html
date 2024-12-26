@@ -249,6 +249,10 @@
                                 <textarea class="emby-input" id="txtOpenAiXSystemPrompt" label="OpenAI system prompt" rows="6"></textarea>
                                 <div class="fieldDescription">Custom system prompt for translation. Leave empty to use default prompt.</div>
                             </div>
+                            <div class="inputContainer">
+                                <input is="emby-input" type="number" id="txtOpenAiXTemperature" label="OpenAI temperature" min="0.0" max="2.0" step="0.1" />
+                                <div class="fieldDescription">Controls randomness in the model's output (0.0-2.0). Lower values make the output more focused and deterministic.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -406,6 +410,7 @@
                 $('#txtOpenAiXApiKey', page).val(config.OpenAiXApiKey).change();
                 $('#txtOpenAiXModel', page).val(config.OpenAiXModel).change();
                 $('#txtOpenAiXSystemPrompt', page).val(config.OpenAiXSystemPrompt).change();
+                $('#txtOpenAiXTemperature', page).val(config.OpenAiXTemperature).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -449,6 +454,7 @@
                 config.OpenAiXApiKey = $('#txtOpenAiXApiKey', form).val();
                 config.OpenAiXModel = $('#txtOpenAiXModel', form).val();
                 config.OpenAiXSystemPrompt = $('#txtOpenAiXSystemPrompt', form).val();
+                config.OpenAiXTemperature = parseFloat($('#txtOpenAiXTemperature', form).val()) || 0.7;
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');

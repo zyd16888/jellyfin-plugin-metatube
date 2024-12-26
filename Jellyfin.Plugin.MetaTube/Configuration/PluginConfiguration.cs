@@ -211,6 +211,13 @@ public class PluginConfiguration : BasePluginConfiguration
     public string OpenAiXSystemPrompt { get; set; } = string.Empty;
 
 #if __EMBY__
+    [DisplayName("OpenAI temperature")]
+    [Description("Controls randomness in the model's output (0.0-2.0). Lower values make the output more focused and deterministic.")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public double OpenAiXTemperature { get; set; } = 0.7;
+
+#if __EMBY__
     [DisplayName("Enable title substitution")]
 #endif
     public bool EnableTitleSubstitution { get; set; } = false;
