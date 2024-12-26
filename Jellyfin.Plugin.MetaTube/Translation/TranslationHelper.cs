@@ -69,7 +69,7 @@ public static class TranslationHelper
                     { "base-url", Configuration.OpenAiXBaseUrl },
                     { "model", Configuration.OpenAiXModel },
                     { "system-prompt", Configuration.OpenAiXSystemPrompt },
-                    { "temperature", Configuration.OpenAiXTemperature.ToString("F1") }
+                    { "temperature", Configuration.OpenAiXTemperature }
                 });
                 break;
             default:

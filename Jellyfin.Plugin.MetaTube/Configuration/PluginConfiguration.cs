@@ -215,7 +215,7 @@ public class PluginConfiguration : BasePluginConfiguration
     [Description("Controls randomness in the model's output (0.0-2.0). Lower values make the output more focused and deterministic.")]
     [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
 #endif
-    public double OpenAiXTemperature { get; set; } = 0.7;
+    public float OpenAiXTemperature { get; set; } = 0.7f;
 
 #if __EMBY__
     [DisplayName("Enable title substitution")]
