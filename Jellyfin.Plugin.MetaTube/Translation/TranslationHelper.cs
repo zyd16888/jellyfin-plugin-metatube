@@ -1,6 +1,7 @@
 using System.Collections.Specialized;
 using Jellyfin.Plugin.MetaTube.Configuration;
 using Jellyfin.Plugin.MetaTube.Metadata;
+using System.Globalization;
 
 namespace Jellyfin.Plugin.MetaTube.Translation;
 
@@ -69,7 +70,7 @@ public static class TranslationHelper
                     { "base-url", Configuration.OpenAiXBaseUrl },
                     { "model", Configuration.OpenAiXModel },
                     { "system-prompt", Configuration.OpenAiXSystemPrompt },
-                    { "temperature", Configuration.OpenAiXTemperature }
+                    { "temperature", Configuration.OpenAiXTemperature.ToString(CultureInfo.InvariantCulture) }
                 });
                 break;
             default:
